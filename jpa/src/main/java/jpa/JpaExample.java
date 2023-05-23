@@ -1,12 +1,11 @@
 package jpa;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 public class JpaExample {
     public static void main(String[] args) throws Exception {
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("primary");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        try {
+        try (EntityManager entityManager = entityManagerFactory.createEntityManager()) {
             // TODO Objekte erzeugen
 
             EntityTransaction transaction = entityManager.getTransaction();
@@ -27,7 +26,6 @@ public class JpaExample {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            entityManager.close();
             System.exit(0);
         }
     }
